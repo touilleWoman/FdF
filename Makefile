@@ -22,4 +22,12 @@ NAME = fdf
 all: $(NAME)
 
 $(NAME):
-	cc -I minilibx $(SOURCE) -L minilibx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	cc -I minilibx_macos $(SOURCE) -L minilibx_macos -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+clean:
+	rm -f *.o
+
+fclean: clean
+	rm -f $(NAME)
+
+re: all fclean
