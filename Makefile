@@ -30,4 +30,4 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: all fclean
+re: fclean all
