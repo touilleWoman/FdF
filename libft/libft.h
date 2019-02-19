@@ -70,6 +70,7 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
+int				get_next_line(const int fd, char **line);
 
 typedef struct	s_list
 {
