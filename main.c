@@ -43,6 +43,7 @@ int		draw()
 		return (1);
 	mlx_clear_window(ctx.mlx_ptr, ctx.win_ptr);
 	img_ptr = mlx_new_image(ctx.mlx_ptr, 400, 400);
+	
 	data_addr = mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);
 	printf("%d %d %d\n", bits_per_pixel, size_line, endian);
 	

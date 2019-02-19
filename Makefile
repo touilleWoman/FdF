@@ -18,21 +18,22 @@ CFLAGS = -Wall -Werror -Wextra
 
 SOURCE = main.c
 
-OFILE = $(SOURCE:.c =.o)
+OFILE = $(SOURCE:.c=.o)
 
 NAME = fdf
 
+LIBFT = libft/libft.a
+
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OFILE)
-	$(CC) $(CFLAGS) $(OFILE) -L minilibx_macos -I minilibx_macos libft/libft.a   -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME):  $(OFILE)
+	$(CC) $(CFLAGS) $(OFILE)   libft/libft.a  -L minilibx_macos   -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-$(OFILE): $(SOURCE)
-	$(CC) $(CFLAGS) $(SOURCE)    
+$(OFILE): $(SOURCE) $(LIBFT)
+	$(CC) $(CFLAGS) -c $(SOURCE)  -I minilibx_macos
 
 $(LIBFT):
 	make -C ./libft
-
 
 clean:
 	rm -f $(OFILE)
