@@ -30,9 +30,9 @@ int		draw()
 {
 	t_context	ctx;
 	void		*img_ptr;
-	int			*bits_per_pixel;
-	int			*size_line;
-	int 		*endian;
+	int			bits_per_pixel;
+	int			size_line;
+	int 		endian;
 	char		*data_addr;
 
 	ctx.mlx_ptr = mlx_init();
@@ -43,7 +43,15 @@ int		draw()
 		return (1);
 	mlx_clear_window(ctx.mlx_ptr, ctx.win_ptr);
 	img_ptr = mlx_new_image(ctx.mlx_ptr, 400, 400);
-	data_addr = mlx_get_data_addr(img_ptr, bits_per_pixel, size_line, endian);
+	data_addr = mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);
+	printf("%d %d %d\n", bits_per_pixel, size_line, endian);
+	
+
+	for (int i = 0; i < 400; ++i)
+	{
+		data_addr[2 + i*4] = 0xFF;
+
+	}
 
 
 

@@ -13,19 +13,29 @@
 .PHONY: all clean fclean re
 
 CC = cc
+
 CFLAGS = -Wall -Werror -Wextra
 
-SOURCE = main.c \
+SOURCE = main.c
+
+OFILE = $(SOURCE:.c =.o)
 
 NAME = fdf
 
 all: $(NAME)
 
-$(NAME):
-	cc -I minilibx_macos $(SOURCE) -L minilibx_macos -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(LIBFT) $(OFILE)
+	$(CC) $(CFLAGS) $(OFILE) -L minilibx_macos -I minilibx_macos libft/libft.a   -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+$(OFILE): $(SOURCE)
+	$(CC) $(CFLAGS) $(SOURCE)    
+
+$(LIBFT):
+	make -C ./libft
+
 
 clean:
-	rm -f *.o
+	rm -f $(OFILE)
 
 fclean: clean
 	rm -f $(NAME)
