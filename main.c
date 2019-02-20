@@ -48,7 +48,7 @@ int		fdf()
 
 	data_addr = mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);
 	printf("%d %d %d\n", bits_per_pixel, size_line, endian);
-	
+
 	data_addr[2] =0xFF;
 	data_addr[6] =0xFF;
 	data_addr[10] =0xFF;
@@ -86,7 +86,7 @@ int main(int argc, char **argv)
 		ft_putendl("Usage : ./fdf <map file name>");
 		return (0);
 	}
-	if (stock_map(argv[1]) == -1)
+	if (load_map(argv[1]) == -1)
 	{
 		ft_putendl("wrong map");
 		return (0);

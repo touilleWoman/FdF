@@ -90,5 +90,10 @@ t_list			*ft_lstcpy(t_list *lst);
 int				ft_word_nbr_counter(char const *s, char c);
 int				ft_islower(int c);
 int				ft_isupper(int c);
+/*
+** convertir un tableux de string {"0", "5", "10"} vers un tableau de int
+** [0, 10, 5]
+*/
+int				*ft_aatoii(char **pptr);
 
 #endif

@@ -28,7 +28,7 @@ ft_itoa.c ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c \
 ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c \
 ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstcpy.c \
 ft_word_nbr_counter.c ft_lstlen.c ft_islower.c ft_isupper.c \
-get_next_line.c \
+get_next_line.c ft_aatoii.c \
 
 HEADER = libft.h get_next_line.h
 
@@ -41,8 +41,8 @@ all: $(NAME)
 $(NAME): $(OFILE)
 	ar rcs $(NAME) $(OFILE)
 
-%.o: %.c $(HEADER) $(SOURCE) 
-	$(CC) $(CFLAGS) -c $(SOURCE) 
+%.o: %.c $(HEADER) $(SOURCE)
+	$(CC) $(CFLAGS) -c $(SOURCE)
 
 clean:
 	rm -f $(OFILE)

@@ -1,47 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_aatoii.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/18 15:06:17 by jleblond          #+#    #+#             */
-/*   Updated: 2019/02/18 15:06:18 by jleblond         ###   ########.fr       */
+/*   Created: 2019/02/20 09:07:20 by jleblond          #+#    #+#             */
+/*   Updated: 2019/02/20 09:07:25 by jleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-#ifndef FDF_H
-# define FDF_H
-
-
-
-# include "mlx.h"
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <math.h>
-# include <fcntl.h>
-
-# define KEYCODE_ESC 53
-
-
-typedef struct context
+int		*ft_aatoii(char **pptr)
 {
-	void *mlx_ptr;
-	void *win_ptr;
-} 			t_context;
+	int		x;
+	int		*tab;
 
-typedef struct map_params
-{
-	int			x;
-	int			y;
-	int			z;
-	int		**map;
-	char	**buf;
-} 			t_map_params;
-
-int		load_map(char *str);
-
-
-#endif
+	x = 0;
+	while (pptr[x] != 0)
+	{
+		x++;
+	}
+	tab = (int*)malloc(x * sizeof(int));
+	if (tab == NULL)
+		return (0);
+	x = 0;
+	while (pptr[x] != 0)
+	{
+		tab[x] = ft_atoi(pptr[x]);
+		x++;
+	}
+	return (tab);
+}
