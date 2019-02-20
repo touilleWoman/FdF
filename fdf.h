@@ -36,11 +36,11 @@ typedef struct map_params
 {
 	int			x;
 	int			y;
-	int			z;
-	int		**map;
+	int			ret;
+	int			**map;
 } 			t_map_params;
 
-int		load_map(char *str);
+t_map_params	load_map(char *argv);
 
 
 #endif

@@ -79,23 +79,32 @@ int		fdf()
 
 int main(int argc, char **argv)
 {
-	int		ret;
+	t_map_params mpp;
 
 	if (argc != 2)
 	{
 		ft_putendl("Usage : ./fdf <map file name>");
 		return (0);
 	}
-	if (load_map(argv[1]) == -1)
+
+
+
+	mpp = load_map(argv[1]);
+	if (mpp.ret == -2)
 	{
-		ft_putendl("wrong map");
+		ft_putendl("map file problem");
 		return (0);
 	}
-	ret = fdf();
-	if (ret == -1)
+	if (mpp.ret == -1)
 	{
-		printf("error");
+		ft_putendl("error");
+		return (0);
 	}
+	// ret = fdf();
+	// if (ret == -1)
+	// {
+	// 	printf("error");
+	// }
 	return (0);
 }
 

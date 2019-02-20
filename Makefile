@@ -16,7 +16,7 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SOURCE = main.c stock_map.c 
+SOURCE = main.c map.c
 
 OFILE = $(SOURCE:.c=.o)
 
