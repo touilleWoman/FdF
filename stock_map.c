@@ -50,7 +50,7 @@ int		check_map(char *argv, t_map_params *mpp)
 		if (ret == -1)
 			return (ret);
 		if(mpp->y == 0)
-			mpp->x = ft_strlen(line);
+			mpp->x = ft_strlen(line); //ici mpp->x est le longeur de str
 		if (ft_strlen(line) != (size_t)mpp->x)
 			return (-1);
 		mpp->y++;
@@ -60,42 +60,58 @@ int		check_map(char *argv, t_map_params *mpp)
 }
 
 
+int		*aatoii(char **pptr, int *mppx)
+{
+	int		*tab;
+
+	*mppx = 0;
+
+	while (pptr[*mppx] != 0)
+	{
+		(*mppx)++;
+	}
+	tab = (int*)malloc((*mppx) * sizeof(int));
+	if (tab == NULL)
+		return (0);
+	*mppx = 0;
+	while (pptr[*mppx] != 0)
+	{
+		tab[*mppx] = ft_atoi(pptr[*mppx]);
+		(*mppx)++;
+	}
+	return (tab);
+}
+
 
 
 int		load_map(char *argv)
 {
-	// int				fd;
-	// char			*line;
+	int				fd;
+	char			*line;
 	int				ret;
 	t_map_params	mpp;
 
 
-	// fd = open(argv, O_RDONLY);
-	// if (fd == -1)
-	// 	return (-1);
+	fd = open(argv, O_RDONLY);
+	if (fd == -1)
+		return (-1);
 	ret = check_map(argv, &mpp);
 	if (ret == -1)
 		return (ret);
-	printf("x:%dy:%d\n", mpp.x, mpp.y);
 
-	// mpp.y = 0;
-	// line = 0;
-	// while (1)
-	// {
-	// 	ret = get_next_line(fd, &line);
-
-	// 	if (ret == -1)
-	// 		return (ret);
-	// 	if (ret == 0)
-	// 		break;
-	// 	map.x = ft_strsplit(line,)
-	// 	printf("x==%d\n", mpp.x);
-	// 	mpp.map[mpp.y] = ft_aatoii(ft_strsplit(line, ' ')); //leaks possbile ici
-	// 	for (int i = 0; i < 20; ++i)
-	// 	{
-	// 		printf("%d\n", mpp.map[mpp.y][i]);
-	// 	}
-	// 	mpp.y++;
-	// }
+	line = 0;
+	mpp.map = (int**)malloc(sizeof(int*) * mpp.y);
+	mpp.y = 0;
+	while (1)
+	{
+		ret = get_next_line(fd, &line);
+		if (ret == -1)
+			return (ret);
+		if (ret == 0)
+			break;
+		mpp.map[mpp.y] = aatoii(ft_strsplit(line, ' '), &mpp.x); //leaks possbile ici
+		mpp.y++;
+	}
+	printf("x%dy%d\n", mpp.x, mpp.y );
 	return (0);
 }

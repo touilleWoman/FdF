@@ -38,7 +38,6 @@ typedef struct map_params
 	int			y;
 	int			z;
 	int		**map;
-	char	**buf;
 } 			t_map_params;
 
 int		load_map(char *str);
