@@ -41,6 +41,7 @@ typedef struct map_params
 } 			t_map_params;
 
 t_map_params	load_map(char *argv);
+int				fdf(t_map_params	mpp);
 
 
 #endif
