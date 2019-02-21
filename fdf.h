@@ -25,6 +25,13 @@
 
 # define KEYCODE_ESC 53
 
+# define WIN_X 1200
+# define WIN_Y 900
+# define IMG_X 400
+# define IMG_Y 300
+# define RADIANT 1.0471975512 // 60degree
+
+
 
 typedef struct context
 {
@@ -40,8 +47,15 @@ typedef struct map_params
 	int			**map;
 } 			t_map_params;
 
+typedef struct float_point
+{
+	float		x;
+	float		y;
+}			t_float_point;
+
 t_map_params	load_map(char *argv);
 int				fdf(t_map_params	mpp);
+t_float_point convert2d(int x, int y, int z);
 
 
 #endif
