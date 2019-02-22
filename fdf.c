@@ -21,6 +21,11 @@ int		key_press(int keycode, void *param)
 		mlx_destroy_window(pctx->mlx_ptr, pctx->win_ptr);
 		exit(0);
 	}
+	// if (keycode == KEYCODE_P)
+	// {
+	// 	pctx->preci = pctx->preci + 100;
+	// }
+	// draw
 	return (0);
 }
 
@@ -54,66 +59,20 @@ int		fdf(t_map_params	mpp)
 	ctx.img_ptr = mlx_new_image(ctx.mlx_ptr, WIN_X, WIN_Y);
 
 	data_addr = mlx_get_data_addr(ctx.img_ptr, &ctx.bpp, &ctx.size_line, &ctx.endian);
+	reset_map(&ctx);
 
-
-	draw(mpp, data_addr);
-
-
-
-	// t_float_point  f_point1;
-
-	// x = 0;
-	// y = 0;
-	// int	count = 0;
-	// float  xx;
-	// float yy;
-	// while (x < mpp.x)
-	// {
-
-	// 	f_point = convert2d(x, y, mpp.map[y][x], mpp); //三者均为坐标值
+	draw(mpp, data_addr, &ctx);
 
 
 
-	// 	x++;
-
-	// 	f_point1 = convert2d(x, y, mpp.map[y][x], mpp); //三者均为坐标值
-
-	// 	while ( count <  PRECISION)
-	// 	{
-	// 		xx = f_point.x + (((f_point1.x - f_point.x)*count)/PRECISION );
-	// 		yy = (((f_point1.y - f_point.y) / (f_point1.x - f_point.x)) * (xx - f_point.x)) + f_point.y;
-	// 		draw_point( (xx ), (yy ), data_addr);
-	// 		count++;
-	// 	}
-	// 	count = 0;
-
-	// }
-
-	// while (y < mpp.y)
-	// {
-	// 	while (x < mpp.x)
-	// 	{
-
-	// 		f_point = convert2d(x, y, mpp.map[y][x], mpp); //三者均为坐标值
-
-
-
-	// 		x++;
-
-	// 		f_point1 = convert2d(x, y, mpp.map[y][x], mpp); //三者均为坐标值
-
-	// 	}
-	// 	x = 0;
-	// 	y++;
-	// }
 
 
 
 	mlx_put_image_to_window(ctx.mlx_ptr, ctx.win_ptr, ctx.img_ptr, 10, 10);
 
 
-	//mlx_hook (ctx.win_ptr, 2, 0, key_press, &ctx);
-	mlx_key_hook (ctx.win_ptr, key_press, &ctx);
+	mlx_hook (ctx.win_ptr, 2, 0, key_press, &ctx);
+	//mlx_key_hook (ctx.win_ptr, key_press, &ctx);
 
 	mlx_loop(ctx.mlx_ptr);
 	return (0);

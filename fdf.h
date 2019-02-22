@@ -24,6 +24,8 @@
 # include <fcntl.h>
 
 # define KEYCODE_ESC 53
+# define KEYCODE_P 35
+
 
 # define WIN_X 1200
 # define WIN_Y 900
@@ -44,6 +46,8 @@ typedef struct context
 	int	size_line;
 	int	endian;
 	void *img_ptr;
+	int		preci;
+	int		d;
 } 			t_context;
 
 typedef struct map_params
@@ -60,12 +64,20 @@ typedef struct float_point
 	float		y;
 }			t_float_point;
 
+// typedef struct event
+// {
+// 	int		preci;
+// 	int		d;
+// }				t_event;
+
+
 t_map_params	load_map(char *argv);
 int				fdf(t_map_params	mpp);
 t_float_point convert2d(int x, int y, int z, t_map_params mpp);
 void	draw_point(float fx, float fy, char *data_addr);
-void	draw(t_map_params	mpp, char *data_addr);
-void	draw_trait(t_float_point  fp1, t_float_point  fp, char *data_addr);
+void	draw(t_map_params	mpp, char *data_addr, t_context *ctx_p);
+void	draw_trait(t_float_point  fp1, t_float_point  fp, char *data_addr, t_context *ctx_p);
+void	reset_map(t_context *ctx_p);
 
 
 #endif

@@ -16,7 +16,7 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SOURCE = main.c map.c fdf.c calculate.c draw.c
+SOURCE = main.c map.c fdf.c calculate.c draw.c events.c
 
 OFILE = $(SOURCE:.c=.o)
 

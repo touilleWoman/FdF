@@ -27,24 +27,24 @@ void	draw_point(float fx, float fy, char *data_addr)
 }
 
 //point fp1 est apres fp
-void	draw_trait(t_float_point  fp1, t_float_point  fp, char *data_addr)
+void	draw_trait(t_float_point  fp1, t_float_point  fp, char *data_addr, t_context *ctx_p)
 {
 	int		count;
 	float	x;
 	float	y;
 
 	count = 0;
-	while ( count <  PRECISION)
+	while ( count <  (ctx_p->preci))
 	{
 		if ( fp1.x != fp.x)
 		{
- 			x = fp.x + (((fp1.x - fp.x)*count)/PRECISION );
+ 			x = fp.x + (((fp1.x - fp.x)*count)/(ctx_p->preci) );
  			y = (((fp1.y - fp.y) / (fp1.x - fp.x)) * (x - fp.x)) + fp.y;
  		}
  		else
  		{
  			x = fp.x;
- 			y = fp.y + (((fp1.y - fp.y)*count)/PRECISION );
+ 			y = fp.y + (((fp1.y - fp.y)*count)/(ctx_p->preci) );
  		}
  		draw_point(x, y, data_addr);
  		count++;
@@ -55,7 +55,7 @@ void	draw_trait(t_float_point  fp1, t_float_point  fp, char *data_addr)
 
 
 
-void	draw(t_map_params	mpp, char *data_addr)
+void	draw(t_map_params	mpp, char *data_addr, t_context *ctx_p)
 {
 	int		x;
 	int		y;
@@ -82,22 +82,22 @@ void	draw(t_map_params	mpp, char *data_addr)
 			{
 				fp2 = convert2d(x , y + 1, mpp.map[y + 1][x], mpp); //point under  fp
 
-				draw_trait(fp2, fp, data_addr);
+				draw_trait(fp2, fp, data_addr, ctx_p);
 
 			}
 			if (y == (mpp.y - 1) && x != (mpp.x - 1))
 			{
 				fp1 = convert2d((x + 1), y, mpp.map[y][x + 1], mpp); //point on the right of fp
 
-				draw_trait(fp1, fp, data_addr);
+				draw_trait(fp1, fp, data_addr, ctx_p);
 			}
 			else if(x < (mpp.x - 1) && y < (mpp.y - 1))
 			{
 				fp1 = convert2d((x + 1), y, mpp.map[y][x + 1], mpp); //point on the right of fp
 				fp2 = convert2d(x , y + 1, mpp.map[y + 1][x], mpp); //point under  fp
 
-				draw_trait(fp1, fp, data_addr);
-				draw_trait(fp2, fp, data_addr);
+				draw_trait(fp1, fp, data_addr, ctx_p);
+				draw_trait(fp2, fp, data_addr, ctx_p);
 			}
 
 
@@ -123,9 +123,5 @@ void	draw(t_map_params	mpp, char *data_addr)
 	// fp2 = convert2d(x, y, mpp.map[y][x], mpp);
 
 	// draw_trait(fp2, fp, data_addr);
-
-
-
-
 
 }
