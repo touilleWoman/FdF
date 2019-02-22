@@ -32,7 +32,7 @@
 # define ANGLE 0.57735026919
  // angle de vu = 60degree  ANGLE = tan(angle de vu / 2)
 # define D 2
-# define PRECISION 100
+# define PRECISION 1000
 
 
 
@@ -64,6 +64,8 @@ t_map_params	load_map(char *argv);
 int				fdf(t_map_params	mpp);
 t_float_point convert2d(int x, int y, int z, t_map_params mpp);
 void	draw_point(float fx, float fy, char *data_addr);
+void	draw(t_map_params	mpp, char *data_addr);
+void	draw_trait(t_float_point  fp1, t_float_point  fp, char *data_addr);
 
 
 #endif

@@ -55,63 +55,39 @@ int		fdf(t_map_params	mpp)
 
 	data_addr = mlx_get_data_addr(ctx.img_ptr, &ctx.bpp, &ctx.size_line, &ctx.endian);
 
-	// for (int i = 0; i <= 400; ++i)
+
+	draw(mpp, data_addr);
+
+
+
+	// t_float_point  f_point1;
+
+	// x = 0;
+	// y = 0;
+	// int	count = 0;
+	// float  xx;
+	// float yy;
+	// while (x < mpp.x)
 	// {
-	// 	data_addr[2 + i*4] = 0xFF;
+
+	// 	f_point = convert2d(x, y, mpp.map[y][x], mpp); //三者均为坐标值
+
+
+
+	// 	x++;
+
+	// 	f_point1 = convert2d(x, y, mpp.map[y][x], mpp); //三者均为坐标值
+
+	// 	while ( count <  PRECISION)
+	// 	{
+	// 		xx = f_point.x + (((f_point1.x - f_point.x)*count)/PRECISION );
+	// 		yy = (((f_point1.y - f_point.y) / (f_point1.x - f_point.x)) * (xx - f_point.x)) + f_point.y;
+	// 		draw_point( (xx ), (yy ), data_addr);
+	// 		count++;
+	// 	}
+	// 	count = 0;
 
 	// }
-
-	int		x;
-	int		y;
-	t_float_point  f_point;
-
-
-	x = 0;
-	y = 0;
-	while (y < mpp.y)
-	{
-		while (x < mpp.x)
-		{
-
-			f_point = convert2d(x, y, mpp.map[y][x], mpp); //三者均为坐标值
-
-			draw_point(f_point.x, f_point.y, data_addr);
-
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-
-
-	t_float_point  f_point1;
-
-	x = 0;
-	y = 0;
-	int	count = 0;
-	float  xx;
-	float yy;
-	while (x < mpp.x)
-	{
-
-		f_point = convert2d(x, y, mpp.map[y][x], mpp); //三者均为坐标值
-
-
-
-		x++;
-
-		f_point1 = convert2d(x, y, mpp.map[y][x], mpp); //三者均为坐标值
-
-		while ( count <  PRECISION)
-		{
-			xx = f_point.x + (((f_point1.x - f_point.x)*count)/PRECISION );
-			yy = (((f_point1.y - f_point.y) / (f_point1.x - f_point.x)) * (xx - f_point.x)) + f_point.y;
-			draw_point( (xx ), (yy ), data_addr);
-			count++;
-		}
-		count = 0;
-
-	}
 
 	// while (y < mpp.y)
 	// {

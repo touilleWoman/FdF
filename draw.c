@@ -12,6 +12,7 @@
 
 #include "fdf.h"
 
+//fy < 1 et > 0
 void	draw_point(float fx, float fy, char *data_addr)
 {
 	int		i;
@@ -23,4 +24,108 @@ void	draw_point(float fx, float fy, char *data_addr)
 
 	i = y*WIN_X + x;
 	data_addr[2 + i * 4] = 0xff;
+}
+
+//point fp1 est apres fp
+void	draw_trait(t_float_point  fp1, t_float_point  fp, char *data_addr)
+{
+	int		count;
+	float	x;
+	float	y;
+
+	count = 0;
+	while ( count <  PRECISION)
+	{
+		if ( fp1.x != fp.x)
+		{
+ 			x = fp.x + (((fp1.x - fp.x)*count)/PRECISION );
+ 			y = (((fp1.y - fp.y) / (fp1.x - fp.x)) * (x - fp.x)) + fp.y;
+ 		}
+ 		else
+ 		{
+ 			x = fp.x;
+ 			y = fp.y + (((fp1.y - fp.y)*count)/PRECISION );
+ 		}
+ 		draw_point(x, y, data_addr);
+ 		count++;
+
+
+	}
+}
+
+
+
+void	draw(t_map_params	mpp, char *data_addr)
+{
+	int		x;
+	int		y;
+	t_float_point  fp;
+	//t_float_point  fp_max;
+
+	t_float_point  fp1;
+	t_float_point  fp2;
+
+
+	x = 0;
+	y = 0;
+	while (y < mpp.y)
+	{
+		while (x < mpp.x)
+		{
+			fp = convert2d(x, y, mpp.map[y][x], mpp); //三者均为坐标值
+			draw_point(fp.x, fp.y, data_addr);
+///////////////draw line
+
+
+
+			if (x == (mpp.x - 1) && y != (mpp.y - 1))
+			{
+				fp2 = convert2d(x , y + 1, mpp.map[y + 1][x], mpp); //point under  fp
+
+				draw_trait(fp2, fp, data_addr);
+
+			}
+			if (y == (mpp.y - 1) && x != (mpp.x - 1))
+			{
+				fp1 = convert2d((x + 1), y, mpp.map[y][x + 1], mpp); //point on the right of fp
+
+				draw_trait(fp1, fp, data_addr);
+			}
+			else if(x < (mpp.x - 1) && y < (mpp.y - 1))
+			{
+				fp1 = convert2d((x + 1), y, mpp.map[y][x + 1], mpp); //point on the right of fp
+				fp2 = convert2d(x , y + 1, mpp.map[y + 1][x], mpp); //point under  fp
+
+				draw_trait(fp1, fp, data_addr);
+				draw_trait(fp2, fp, data_addr);
+			}
+
+
+
+
+////////////////////////draw line
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+
+
+
+	//fp_max = convert2d(mpp.x - 1, mpp.y -1, mpp.map[mpp.y -1][mpp.x -1], mpp);
+	//printf("xmax:%9.6fymax:%9.6f\n", fp_max.x, fp_max.y);
+
+
+	// x = 0;
+	// y = 2;
+	// fp = convert2d(x, y, mpp.map[y][x], mpp);
+	// y = y + 1;
+	// fp2 = convert2d(x, y, mpp.map[y][x], mpp);
+
+	// draw_trait(fp2, fp, data_addr);
+
+
+
+
+
 }
