@@ -16,7 +16,7 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SOURCE = main.c map.c fdf.c calculate.c
+SOURCE = main.c map.c fdf.c calculate.c draw.c
 
 OFILE = $(SOURCE:.c=.o)
 
@@ -24,12 +24,14 @@ NAME = fdf
 
 LIBFT = libft/libft.a
 
+HEADER = fdf.h
+
 all: $(NAME)
 
 $(NAME):  $(OFILE)
 	$(CC) $(CFLAGS) $(OFILE)   libft/libft.a  -L minilibx_macos   -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-$(OFILE): $(SOURCE) $(LIBFT)
+$(OFILE): $(SOURCE) $(LIBFT) $(HEADER)
 	$(CC) $(CFLAGS) -c $(SOURCE)  -I minilibx_macos
 
 $(LIBFT):

@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/15 15:36:08 by jleblond          #+#    #+#             */
-/*   Updated: 2019/01/15 15:36:10 by jleblond         ###   ########.fr       */
+/*   Created: 2019/02/22 13:04:10 by jleblond          #+#    #+#             */
+/*   Updated: 2019/02/22 13:04:11 by jleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int main(int argc, char **argv)
+void	draw_point(float fx, float fy, char *data_addr)
 {
-	t_map_params mpp;
+	int		i;
+	int		x;
+	int		y;
 
-	if (argc != 2)
-	{
-		ft_putendl("Usage : ./fdf <map file name>");
-		return (0);
-	}
-	mpp = load_map(argv[1]);
-	if (mpp.ret == -2)
-	{
-		ft_putendl("map file is not correct");
-		return (0);
-	}
-	if (mpp.ret == -1)
-	{
-		ft_putendl("error");
-		return (0);
-	}
-	mpp.ret = fdf(mpp);
-	if (mpp.ret == -1)
-	{
-		printf("error");
-	}
-	return (0);
+	x = fx * WIN_Y;
+	y = fy * WIN_Y;
+
+	i = y*WIN_X + x;
+	data_addr[2 + i * 4] = 0xff;
 }
-
