@@ -12,30 +12,12 @@
 
 #include "fdf.h"
 
-int		key_press(int keycode, void *param)
-{
-	t_context *pctx = (t_context *)param;
-
-	if (keycode == KEYCODE_ESC)
-	{
-		mlx_destroy_window(pctx->mlx_ptr, pctx->win_ptr);
-		exit(0);
-	}
-	// if (keycode == KEYCODE_P)
-	// {
-	// 	pctx->preci = pctx->preci + 100;
-	// }
-	// draw
-	return (0);
-}
-
 
 
 
 int		fdf(t_map_params	mpp)
 {
 	t_context	ctx;
-	char		*data_addr;
 
 
 // //test to show map stocké
@@ -48,20 +30,20 @@ int		fdf(t_map_params	mpp)
 // 		}
 // 		printf("\n");
 // 	}
-
+	ctx.mpp = mpp;
 	ctx.mlx_ptr = mlx_init();
 	if (ctx.mlx_ptr == 0)
 		return (-1);
-	ctx.win_ptr = mlx_new_window(ctx.mlx_ptr, WIN_X, WIN_Y, "FdF");
+	ctx.win_ptr = mlx_new_window(ctx.mlx_ptr, WIN_X, WIN_Y, WIN_NAME);
 	if (ctx.win_ptr == 0)
 		return (-1);
 	//mlx_clear_window(ctx.mlx_ptr, ctx.win_ptr);
 	ctx.img_ptr = mlx_new_image(ctx.mlx_ptr, WIN_X, WIN_Y);
 
-	data_addr = mlx_get_data_addr(ctx.img_ptr, &ctx.bpp, &ctx.size_line, &ctx.endian);
+	ctx.data_addr = mlx_get_data_addr(ctx.img_ptr, &ctx.bpp, &ctx.size_line, &ctx.endian);
 	reset_map(&ctx);
 
-	draw(mpp, data_addr, &ctx);
+	draw(&ctx);
 
 
 

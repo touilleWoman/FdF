@@ -55,7 +55,7 @@ void	draw_trait(t_float_point  fp1, t_float_point  fp, char *data_addr, t_contex
 
 
 
-void	draw(t_map_params	mpp, char *data_addr, t_context *ctx_p)
+void	draw(t_context *ctx_p)
 {
 	int		x;
 	int		y;
@@ -68,60 +68,47 @@ void	draw(t_map_params	mpp, char *data_addr, t_context *ctx_p)
 
 	x = 0;
 	y = 0;
-	while (y < mpp.y)
+	while (y < ctx_p->mpp.y)
 	{
-		while (x < mpp.x)
+		while (x < ctx_p->mpp.x)
 		{
-			fp = convert2d(x, y, mpp.map[y][x], mpp); //三者均为坐标值
-			draw_point(fp.x, fp.y, data_addr);
+			fp = convert2d(x, y, ctx_p->mpp.map[y][x], ctx_p->mpp); //三者均为坐标值
+			draw_point(fp.x, fp.y, ctx_p->data_addr);
 ///////////////draw line
 
 
 
-			if (x == (mpp.x - 1) && y != (mpp.y - 1))
+			if (x == (ctx_p->mpp.x - 1) && y != (ctx_p->mpp.y - 1))
 			{
-				fp2 = convert2d(x , y + 1, mpp.map[y + 1][x], mpp); //point under  fp
+				fp2 = convert2d(x , y + 1, ctx_p->mpp.map[y + 1][x], ctx_p->mpp); //point under  fp
 
-				draw_trait(fp2, fp, data_addr, ctx_p);
+				draw_trait(fp2, fp, ctx_p->data_addr, ctx_p);
 
 			}
-			if (y == (mpp.y - 1) && x != (mpp.x - 1))
+			if (y == (ctx_p->mpp.y - 1) && x != (ctx_p->mpp.x - 1))
 			{
-				fp1 = convert2d((x + 1), y, mpp.map[y][x + 1], mpp); //point on the right of fp
+				fp1 = convert2d((x + 1), y, ctx_p->mpp.map[y][x + 1], ctx_p->mpp); //point on the right of fp
 
-				draw_trait(fp1, fp, data_addr, ctx_p);
+				draw_trait(fp1, fp, ctx_p->data_addr, ctx_p);
 			}
-			else if(x < (mpp.x - 1) && y < (mpp.y - 1))
+			else if(x < (ctx_p->mpp.x - 1) && y < (ctx_p->mpp.y - 1))
 			{
-				fp1 = convert2d((x + 1), y, mpp.map[y][x + 1], mpp); //point on the right of fp
-				fp2 = convert2d(x , y + 1, mpp.map[y + 1][x], mpp); //point under  fp
+				fp1 = convert2d((x + 1), y, ctx_p->mpp.map[y][x + 1], ctx_p->mpp); //point on the right of fp
+				fp2 = convert2d(x , y + 1, ctx_p->mpp.map[y + 1][x], ctx_p->mpp); //point under  fp
 
-				draw_trait(fp1, fp, data_addr, ctx_p);
-				draw_trait(fp2, fp, data_addr, ctx_p);
+				draw_trait(fp1, fp, ctx_p->data_addr, ctx_p);
+				draw_trait(fp2, fp, ctx_p->data_addr, ctx_p);
 			}
-
-
-
 
 ////////////////////////draw line
+
 			x++;
 		}
 		x = 0;
 		y++;
 	}
 
+	mlx_put_image_to_window(ctx_p->mlx_ptr, ctx_p->win_ptr, ctx_p->img_ptr, 10, 10);
 
-
-	//fp_max = convert2d(mpp.x - 1, mpp.y -1, mpp.map[mpp.y -1][mpp.x -1], mpp);
-	//printf("xmax:%9.6fymax:%9.6f\n", fp_max.x, fp_max.y);
-
-
-	// x = 0;
-	// y = 2;
-	// fp = convert2d(x, y, mpp.map[y][x], mpp);
-	// y = y + 1;
-	// fp2 = convert2d(x, y, mpp.map[y][x], mpp);
-
-	// draw_trait(fp2, fp, data_addr);
 
 }
