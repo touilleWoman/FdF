@@ -82,13 +82,14 @@ typedef struct context
 	t_map_params mpp;
 	int		var_x;
 	int		var_y;
+	int		temp;
 } 			t_context;
 
 typedef struct color
 {
-	char	r;
-	char	g;
-	char	b;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 }				t_color;
 // typedef struct event
 // {

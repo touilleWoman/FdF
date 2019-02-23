@@ -18,6 +18,8 @@ void	reset_map(t_context *ctx_p)
 	ctx_p->mpp.d = 2;
 	ctx_p->var_z = 0;
 	ctx_p->var_x = 0;
+	ctx_p->temp = 0;
+
 
 
 }
@@ -48,6 +50,11 @@ int		key_press(int keycode, void *param)
 		ctx_p->var_x --;
 	if (keycode == KEYCODE_RIGHT)
 		ctx_p->var_x ++;
+	if (keycode == KEYCODE_UP)
+		ctx_p->temp = ctx_p->temp + 5;
+	if (keycode == KEYCODE_DOWN)
+		ctx_p->temp = ctx_p->temp - 5;
+
 	mlx_clear_window(ctx_p->mlx_ptr, ctx_p->win_ptr);
 	ft_bzero(ctx_p->data_addr, (ctx_p->size_line) * WIN_Y);
 	draw(ctx_p);

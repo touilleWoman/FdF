@@ -13,20 +13,34 @@
 #include "fdf.h"
 
 
-// t_color	color_set(char  color_num)
-// {
+t_color	color_set(int  val_cl)
+{
+	t_color		cl;
 
-
-// 	// red = i * 4 + 2;
-// 	// green = i * 4 + 1;
-// 	// blue = i * 4;
-
-
-// 	ctx_p->data_addr[i * 4 + 1] = z * 10;
-
-
-
-// }
+	if (val_cl > 360)
+	{
+		val_cl = val_cl - 360;
+	}
+	if (val_cl >= 0 && val_cl < 121)
+	{
+		cl.b = 0;
+		cl.g = val_cl * (255 / 120);
+		cl.r = 255 - cl.g;
+	}
+	else if (val_cl < 240)
+	{
+		cl.b = (val_cl - 120) * 255 / 120;
+		cl.g = 255 - cl.b;
+		cl.r = 0;
+	}
+	else
+	{
+		cl.r = (val_cl - 240) * 255 /120;
+		cl.g = 0;
+		cl.b = 255 -cl.r;
+	}
+	return (cl);
+}
 
 //fy < 1 et > 0
 void		draw_point(float fx, float fy, t_context * ctx_p, int z)
@@ -37,7 +51,6 @@ void		draw_point(float fx, float fy, t_context * ctx_p, int z)
 
 	float	x_max;
 
-	z =0;
 
 	x_max = (ctx_p->mpp.x - 1.0) / (ctx_p->mpp.y -1);
 
@@ -51,7 +64,14 @@ void		draw_point(float fx, float fy, t_context * ctx_p, int z)
 	if ((xx >= 1200) || (yy >= 900))
 		return;
 	i = yy * WIN_X + xx;
-	ctx_p->data_addr[i * 4 + 2] = 0xff;
+
+
+	t_color cl;
+
+	cl = color_set(z * 10); //10 需要换成变量
+	ctx_p->data_addr[i * 4 + 2] = cl.r;
+	ctx_p->data_addr[i * 4 + 1] = cl.g;
+	ctx_p->data_addr[i * 4 ] = cl.b;
 
 
 }
@@ -70,13 +90,26 @@ void	draw_trait(t_float_point  fp1, t_float_point  fp, t_context *ctx_p, int z)
 		{
  			x = fp.x + (((fp1.x - fp.x)*count)/(ctx_p->preci) );
  			y = (((fp1.y - fp.y) / (fp1.x - fp.x)) * (x - fp.x)) + fp.y;
+ 			if (fp1.y == fp.y)
+ 			{
+ 				z = 0;
+ 			}
+ 			else
+ 			{
+ 				z = z + 5;
+ 			}
+ 			draw_point(x, y, ctx_p, z);
+
  		}
+
  		else
  		{
  			x = fp.x;
  			y = fp.y + (((fp1.y - fp.y)*count)/(ctx_p->preci) );
+ 			z = 0;
+ 			draw_point(x, y, ctx_p, z);
+
  		}
- 		draw_point(x, y, ctx_p, z);
  		count++;
 
 
