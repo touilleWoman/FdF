@@ -27,9 +27,9 @@ int		key_press(int keycode, void *param)
 		exit(0);
 	}
 	if (keycode == KEYCODE_P)
-	{
 		ctx_p->preci = ctx_p->preci + 100;
-	}
+	if (keycode == KEYCODE_O)
+		ctx_p->preci = ctx_p->preci - 100;
 	mlx_clear_window(ctx_p->mlx_ptr, ctx_p->win_ptr);
 	draw(ctx_p);
 

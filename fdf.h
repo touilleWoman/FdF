@@ -25,6 +25,7 @@
 
 # define KEYCODE_ESC 53
 # define KEYCODE_P 35
+# define KEYCODE_O 31
 
 
 # define WIN_X 1200
