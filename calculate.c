@@ -14,19 +14,27 @@
 
 
 
-t_float_point convert2d(int x, int y, int z, t_map_params mpp)
+t_float_point convert2d(int x, int y, int z, t_context *ctx_p)
 {
-	float 			ar;
 	t_float_point  f_point;
 	int				z1;
 
+	if (z != 0)
+	{
+		z1 = ((ctx_p->mpp.d) * ((ctx_p->mpp.x) - 1)) - (z + ctx_p->var_z);
+	}
+	else
+	{
+		z1 = ((ctx_p->mpp.d) * ((ctx_p->mpp.x) - 1)) - z ;
 
-	z1 = (D * (mpp.x - 1)) - z; // 常量，后面可以移出去
-//	printf("z1:%d\n", z1 );
-	ar = ((mpp.x - 1.0) / (mpp.y -1)); // 常量，后面可以移出去
+	}
+	//printf("z:%d\n", z );
+	//ar = ((mpp.x - 1.0) / (mpp.y -1)); // 常量，后面可以移出去
+
+	x = x + ctx_p->var_x;
+
 	f_point.x = x / (z1 * ANGLE); //f_point.y 在0 到1 之间
 	f_point.y = y / (z1 * ANGLE);
-//	printf("float x:%9.6ffloat y:%9.6f\n", f_point.x, f_point.y );
 
 	return (f_point);
 

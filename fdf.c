@@ -50,7 +50,6 @@ int		fdf(t_map_params	mpp)
 
 
 
-	mlx_put_image_to_window(ctx.mlx_ptr, ctx.win_ptr, ctx.img_ptr, 10, 10);
 
 
 	mlx_hook (ctx.win_ptr, 2, 0, key_press, &ctx);
