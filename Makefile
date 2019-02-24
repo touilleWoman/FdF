@@ -24,6 +24,7 @@ NAME = fdf
 
 LIBFT = libft/libft.a
 
+LIBFT_H = libft/libft.h libft/get_next_line.h
 HEADER = fdf.h
 
 all: $(NAME)
@@ -34,7 +35,7 @@ $(NAME):  $(OFILE)
 $(OFILE): $(SOURCE) $(LIBFT) $(HEADER)
 	$(CC) $(CFLAGS) -c $(SOURCE)  -I minilibx_macos
 
-$(LIBFT):
+$(LIBFT): $(LIBFT_H)
 	make -C ./libft
 
 clean:

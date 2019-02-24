@@ -83,5 +83,6 @@ int		fdf(t_map_params	mpp)
 	//mlx_key_hook (ctx.win_ptr, key_press, &ctx);
 
 	mlx_loop(ctx.mlx_ptr);
+
 	return (0);
 }

@@ -58,8 +58,7 @@ int		key_press(int keycode, void *param)
 	if (keycode == KEYCODE_UP)
 		ctx_p->var_y --;
 	if (keycode == KEYCODE_DOWN)
-		ctx_p->var_y ++;
-	if (keycode == KEYCODE_UP)
+		ctx_p->var_y ++; if (keycode == KEYCODE_UP)
 		ctx_p->temp = ctx_p->temp + 5;
 	if (keycode == KEYCODE_DOWN)
 		ctx_p->temp = ctx_p->temp - 5;

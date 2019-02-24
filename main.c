@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_map_params mpp;
 
@@ -35,8 +35,7 @@ int main(int argc, char **argv)
 	mpp.ret = fdf(mpp);
 	if (mpp.ret == -1)
 	{
-		printf("error");
+		ft_putendl("error");
 	}
 	return (0);
 }
-

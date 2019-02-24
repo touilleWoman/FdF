@@ -21,7 +21,7 @@ int		check_map_line(char *line)
 	{
 		if ((line[i] != ' ')  && (line[i] != '-') && ((line[i] < '0') || (line[i] > '9')))
 		{
-			return (-1);
+			return (- 1);
 		}
 		i++;
 	}
@@ -67,6 +67,8 @@ int		*aatoii(char **pptr, int *mppx)
 {
 	int		*tab;
 
+
+
 	*mppx = 0;
 
 	while (pptr[*mppx] != 0)
@@ -82,6 +84,25 @@ int		*aatoii(char **pptr, int *mppx)
 		tab[*mppx] = ft_atoi(pptr[*mppx]);
 		(*mppx)++;
 	}
+
+	int i;
+	int j;
+	i= 0;
+	j = 0;
+	while (pptr[j] != NULL)
+	{
+		i=0;
+		while (pptr[j][i])
+		{
+			printf("%c", pptr[j][i]);
+			i++;
+		}
+		free(pptr[j]);
+		printf("\n");
+		j++;
+	}
+	free(pptr);
+
 	return (tab);
 }
 
@@ -100,6 +121,7 @@ t_map_params		load_map(char *argv)
 		mpp.ret = -1;
 		return (mpp);
 	}
+
 	mpp.ret = check_map(argv, &mpp);
 	if (mpp.ret == -2)
 	{
@@ -108,17 +130,21 @@ t_map_params		load_map(char *argv)
 
 	line = 0;
 	mpp.map = (int**)malloc(sizeof(int*) * mpp.y);
+
 	mpp.y = 0;
 	while (1)
 	{
 		mpp.ret = get_next_line(fd, &line);
+
 		if (mpp.ret == -1)
 			return (mpp);
 		if (mpp.ret == 0)
 			break;
+		printf("=>%s|\n", line);
 		mpp.map[mpp.y] = aatoii(ft_strsplit(line, ' '), &mpp.x); //leaks possbile ici
 		mpp.y++;
 	}
+
 	//printf("x%dy%d\n", mpp.x, mpp.y );
 	return (mpp);
 }
