@@ -96,6 +96,7 @@ typedef struct context
 	int		var_cl;
 	float 	var_fx;
 	float 	var_fy;
+	float 	angle;
 } 			t_context;
 
 typedef struct color

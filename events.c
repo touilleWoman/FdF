@@ -24,6 +24,7 @@ void	reset_map(t_context *ctx_p)
 	ctx_p->var_cl = 10;
 	ctx_p->var_fx = 0;
 	ctx_p->var_fy = 0;
+	ctx_p->angle = 0.57735026919;
 
 
 
@@ -76,7 +77,10 @@ int		key_press(int keycode, void *param)
 		ctx_p->var_fy = ctx_p->var_fy + 0.1 ;
 	if (keycode == KEYCODE_TWO)
 		ctx_p->var_fy = ctx_p->var_fy - 0.1 ;
-
+	if (keycode == KEYCODE_A)
+		ctx_p->angle = ctx_p->angle - 0.01 ;
+	if (keycode == KEYCODE_S)
+		ctx_p->angle = ctx_p->angle - 0.01 ;
 	mlx_clear_window(ctx_p->mlx_ptr, ctx_p->win_ptr);
 	ft_bzero(ctx_p->data_addr, (ctx_p->size_line) * WIN_Y);
 	draw(ctx_p);
