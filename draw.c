@@ -21,7 +21,6 @@ t_color	color_set(int  val_cl)
 		val_cl = - val_cl;
 	while (val_cl > 360)
 		val_cl = val_cl - 360;
-
 	if (val_cl >= 0 && val_cl < 121)
 	{
 		cl.b = 0;
@@ -49,7 +48,6 @@ void		draw_point(float fx, float fy, t_context * ctx_p, float z)
 	int		i;
 	int		xx;
 	int		yy;
-
 	float	x_max;
 
 
@@ -71,7 +69,7 @@ void		draw_point(float fx, float fy, t_context * ctx_p, float z)
 	int		range;
 
 
-	// if (z < 0) ???
+	// if (z < 0)
 	// {
 
 	// }

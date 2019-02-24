@@ -12,7 +12,17 @@
 
 #include "fdf.h"
 
-int	main(int argc, char **argv)
+void	error_info(int x)
+{
+	if (x == -2)
+		ft_putendl("map file should not be empty");
+	if (x == -3)
+		ft_putendl("content of map file is not right");
+	if (x == -1)
+		ft_putendl("error");
+}
+
+int		main(int argc, char **argv)
 {
 	t_map_params mpp;
 
@@ -22,20 +32,13 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	mpp = load_map(argv[1]);
-	if (mpp.ret == -2)
+	if ((mpp.ret == -1) || (mpp.ret == -2) || (mpp.ret == -3))
 	{
-		ft_putendl("map file is not correct");
-		return (0);
-	}
-	if (mpp.ret == -1)
-	{
-		ft_putendl("error");
+		error_info(mpp.ret);
 		return (0);
 	}
 	mpp.ret = fdf(mpp);
 	if (mpp.ret == -1)
-	{
 		ft_putendl("error");
-	}
 	return (0);
 }

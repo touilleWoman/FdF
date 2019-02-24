@@ -12,14 +12,15 @@
 
 #include "fdf.h"
 
-int		check_map_line(char *line)
+int					check_map_line(char *line)
 {
 	int		i;
 
 	i = 0;
 	while (line[i] != 0)
 	{
-		if ((line[i] != ' ')  && (line[i] != '-') && ((line[i] < '0') || (line[i] > '9')))
+		if ((line[i] != ' ') && (line[i] != '-')
+			&& ((line[i] < '0') || (line[i] > '9')))
 		{
 			return (-1);
 		}
@@ -28,7 +29,7 @@ int		check_map_line(char *line)
 	return (0);
 }
 
-int		check_map(char *argv, t_map_params *mpp)
+int					check_map(char *argv, t_map_params *mpp)
 {
 	int		fd;
 	char	*line;
@@ -37,41 +38,33 @@ int		check_map(char *argv, t_map_params *mpp)
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		return (-2);
+	printf("fd in checkmap:%d\n", fd);
+
 	mpp->y = 0;
 	while (1)
 	{
 		ret = get_next_line(fd, &line);
 		if (ret == -1)
-			return (-2);
+			return (-1);
 		if ((mpp->y == 0) && (ret == 0))
-		{
-			ft_putendl("map file should not be empty");
 			return (-2);
-		}
 		if (ret == 0)
-			break;
+			break ;
 		ret = check_map_line(line);
 		if (ret == -1)
-		{
-			ft_putendl("content of map file is not right");
-			return (-2);
-		}
+			return (-3);
 		mpp->y++;
 	}
 	close(fd);
 	return (0);
 }
 
-//Il gere pas la cas    la carte n'est pas en rectangle
-
-int		*aatoii(char **pptr, int *mppx)
+int					*aatoii(char **pptr, int *mppx)
 {
 	int		*tab;
-
-
+	int		j;
 
 	*mppx = 0;
-
 	while (pptr[*mppx] != 0)
 	{
 		(*mppx)++;
@@ -85,26 +78,15 @@ int		*aatoii(char **pptr, int *mppx)
 		tab[*mppx] = ft_atoi(pptr[*mppx]);
 		(*mppx)++;
 	}
-
-	//int i;
-	int j;
-	//i = 0;
 	j = 0;
 	while (pptr[j] != NULL)
 	{
-		// i=0;
-		// // while (pptr[j][i])
-		// // {
-		// // 	i++;
-		// // }
-		// free(pptr[j]);
+		free(pptr[j]);
 		j++;
 	}
 	free(pptr);
 	return (tab);
 }
-
-
 
 t_map_params		load_map(char *argv)
 {
@@ -113,28 +95,27 @@ t_map_params		load_map(char *argv)
 	t_map_params	mpp;
 
 
+	mpp.ret = check_map(argv, &mpp);
+	if ((mpp.ret == -1) || (mpp.ret == -2) || (mpp.ret == -3))
+		return (mpp);
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 	{
 		mpp.ret = -1;
 		return (mpp);
 	}
-	mpp.ret = check_map(argv, &mpp);
-	if (mpp.ret == -2)
-		return (mpp);
-	line = 0;
 	mpp.map = (int**)malloc(sizeof(int*) * mpp.y);
 	mpp.y = 0;
 	while (1)
 	{
 		mpp.ret = get_next_line(fd, &line);
-
 		if (mpp.ret == -1)
 			return (mpp);
 		if (mpp.ret == 0)
-			break;
-		mpp.map[mpp.y] = aatoii(ft_strsplit(line, ' '), &mpp.x); //leaks possbile ici
+			break ;
+		mpp.map[mpp.y] = aatoii(ft_strsplit(line, ' '), &mpp.x);
 		mpp.y++;
 	}
+	close(fd);
 	return (mpp);
 }
