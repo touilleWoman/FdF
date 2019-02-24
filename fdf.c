@@ -66,7 +66,7 @@ int		fdf(t_map_params	mpp)
 	if (ctx.win_ptr == 0)
 		return (-1);
 	//mlx_clear_window(ctx.mlx_ptr, ctx.win_ptr);
-	ctx.img_ptr = mlx_new_image(ctx.mlx_ptr, WIN_X, WIN_Y);
+	ctx.img_ptr = mlx_new_image(ctx.mlx_ptr, WIN_X - 100, WIN_Y - 100);
 
 	ctx.data_addr = mlx_get_data_addr(ctx.img_ptr, &ctx.bpp, &ctx.size_line, &ctx.endian);
 	reset_map(&ctx);
