@@ -181,6 +181,6 @@ void	draw(t_context *ctx_p)
 		y++;
 	}
 
-	mlx_put_image_to_window(ctx_p->mlx_ptr, ctx_p->win_ptr, ctx_p->img_ptr, 10, 10);
+	mlx_put_image_to_window(ctx_p->mlx_ptr, ctx_p->win_ptr, ctx_p->img_ptr, 50, 100);
 
 }

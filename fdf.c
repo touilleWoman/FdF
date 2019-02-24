@@ -62,11 +62,11 @@ int		fdf(t_map_params	mpp)
 	ctx.mlx_ptr = mlx_init();
 	if (ctx.mlx_ptr == 0)
 		return (-1);
-	ctx.win_ptr = mlx_new_window(ctx.mlx_ptr, WIN_X, WIN_Y, WIN_NAME);
+	ctx.win_ptr = mlx_new_window(ctx.mlx_ptr, WIN_X + 100, WIN_Y + 100, WIN_NAME);
 	if (ctx.win_ptr == 0)
 		return (-1);
 	//mlx_clear_window(ctx.mlx_ptr, ctx.win_ptr);
-	ctx.img_ptr = mlx_new_image(ctx.mlx_ptr, WIN_X - 100, WIN_Y - 100);
+	ctx.img_ptr = mlx_new_image(ctx.mlx_ptr, WIN_X, WIN_Y);
 
 	ctx.data_addr = mlx_get_data_addr(ctx.img_ptr, &ctx.bpp, &ctx.size_line, &ctx.endian);
 	reset_map(&ctx);

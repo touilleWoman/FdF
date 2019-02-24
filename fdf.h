@@ -24,8 +24,6 @@
 # include <fcntl.h>
 
 # define KEYCODE_ESC 53
-# define KEYCODE_P 35
-# define KEYCODE_O 31
 # define KEYCODE_Z 6
 # define KEYCODE_X 7
 # define KEYCODE_UP 126
@@ -38,6 +36,8 @@
 # define KEYCODE_W 13
 # define KEYCODE_A 0
 # define KEYCODE_S 1
+# define KEYCODE_C 8
+# define KEYCODE_V 9
 # define KEYCODE_ONE 83
 # define KEYCODE_TWO 84
 # define KEYCODE_THREE 85
