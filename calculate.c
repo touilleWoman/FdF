@@ -19,7 +19,7 @@ t_float_point convert2d(int x, int y, int z, t_context *ctx_p)
 	t_float_point  f_point;
 	int				z1;
 
-	if (z != 0)
+	if (z != ctx_p->mpp.z_min)
 	{
 		z1 = ((ctx_p->mpp.d) * ((ctx_p->mpp.x) - 1)) - (z + ctx_p->var_z);
 	}
