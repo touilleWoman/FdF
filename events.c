@@ -19,6 +19,10 @@ void	reset_map(t_context *ctx_p)
 	ctx_p->var_z = 0;
 	ctx_p->var_x = 0;
 	ctx_p->temp = 0;
+	ctx_p->var_cl = 10;
+	ctx_p->var_fx = 0;
+	ctx_p->var_fy = 0;
+
 
 
 
@@ -54,6 +58,18 @@ int		key_press(int keycode, void *param)
 		ctx_p->temp = ctx_p->temp + 5;
 	if (keycode == KEYCODE_DOWN)
 		ctx_p->temp = ctx_p->temp - 5;
+	if (keycode == KEYCODE_Q)
+		ctx_p->var_cl = ctx_p->var_cl + 10;
+	if (keycode == KEYCODE_W)
+		ctx_p->var_cl = ctx_p->var_cl - 10;
+	if (keycode == KEYCODE_THREE)
+		ctx_p->var_fx = ctx_p->var_fx + 0.1 ;
+	if (keycode == KEYCODE_ONE)
+		ctx_p->var_fx = ctx_p->var_fx - 0.1 ;
+	// if (keycode == KEYCODE_FIVE)
+	// 	ctx_p->var_fy = ctx_p->var_fy + 0.1 ;
+	// if (keycode == KEYCODE_TWO)
+	// 	ctx_p->var_fy = ctx_p->var_fy - 0.1 ;
 
 	mlx_clear_window(ctx_p->mlx_ptr, ctx_p->win_ptr);
 	ft_bzero(ctx_p->data_addr, (ctx_p->size_line) * WIN_Y);

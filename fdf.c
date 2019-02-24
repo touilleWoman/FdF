@@ -13,7 +13,33 @@
 #include "fdf.h"
 
 
+void	get_maxmin_z(t_context *ctx_p)
+{
+	int		j;
+	int		i;
 
+	j = 0;
+	i = 0;
+	while (j < ctx_p->mpp.y)
+	{
+		while (i < ctx_p->mpp.x)
+		{
+
+			if ((i == 0) && (j == 0))
+			{
+				ctx_p->mpp.z_max = ctx_p->mpp.map[j][i];
+				ctx_p->mpp.z_min = ctx_p->mpp.map[j][i];
+			}
+			else if (ctx_p->mpp.map[j][i] > ctx_p->mpp.z_max)
+				ctx_p->mpp.z_max = ctx_p->mpp.map[j][i];
+			else if (ctx_p->mpp.map[j][i] < ctx_p->mpp.z_max)
+				ctx_p->mpp.z_min = ctx_p->mpp.map[j][i];
+			i++;
+		}
+		i = 0;
+		j++;
+	}
+}
 
 int		fdf(t_map_params	mpp)
 {
@@ -31,6 +57,8 @@ int		fdf(t_map_params	mpp)
 // 		printf("\n");
 // 	}
 	ctx.mpp = mpp;
+	get_maxmin_z(&ctx);
+	//printf("z_max:%d   z_min:%d\n", ctx.mpp.z_max, ctx.mpp.z_min);
 	ctx.mlx_ptr = mlx_init();
 	if (ctx.mlx_ptr == 0)
 		return (-1);

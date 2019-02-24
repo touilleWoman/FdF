@@ -34,6 +34,15 @@
 # define KEYCODE_RIGHT 124
 # define KEYCODE_H 4
 # define KEYCODE_J 38
+# define KEYCODE_Q 12
+# define KEYCODE_W 13
+# define KEYCODE_A 0
+# define KEYCODE_S 1
+# define KEYCODE_ONE 83
+# define KEYCODE_TWO 84
+# define KEYCODE_THREE 85
+# define KEYCODE_FIVE 87
+
 
 
 
@@ -49,7 +58,6 @@
 //0.57735026919
  // angle de vu = 60degree  ANGLE = tan(angle de vu / 2)
 //# define D 2
-# define PRECISION 1000
 # define WIN_NAME "fdf"
 
 typedef struct map_params
@@ -59,6 +67,8 @@ typedef struct map_params
 	int			ret;
 	float		d;
 	int			**map;
+	int			z_max;
+	int			z_min;
 } 			t_map_params;
 
 typedef struct float_point
@@ -83,6 +93,9 @@ typedef struct context
 	int		var_x;
 	int		var_y;
 	int		temp;
+	int		var_cl;
+	float 	var_fx;
+	float 	var_fy;
 } 			t_context;
 
 typedef struct color
@@ -103,10 +116,10 @@ int				fdf(t_map_params	mpp);
 t_float_point convert2d(int x, int y, int z, t_context *ctx_p);
 
 void	draw(t_context *ctx_p);
-void	draw_trait(t_float_point  fp1, t_float_point  fp, t_context *ctx_p, int z);
+void	draw_trait(t_float_point  fp1, t_float_point  fp, t_context *ctx_p, int z, int z1);
 void	reset_map(t_context *ctx_p);
 int		key_press(int keycode, void *param);
-void		draw_point(float fx, float fy, t_context * ctx_p, int z);
+void		draw_point(float fx, float fy, t_context * ctx_p, float z);
 void	color(int i, t_context *ctx_p, int z);
 
 

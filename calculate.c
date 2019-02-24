@@ -33,8 +33,9 @@ t_float_point convert2d(int x, int y, int z, t_context *ctx_p)
 
 	x = x + ctx_p->var_x;
 
-	f_point.x = x / (z1 * ANGLE); //f_point.y 在0 到1 之间
+	f_point.x = x / (z1 * ANGLE) + ctx_p->var_fx; //f_point.y 在0 到1 之间
 	f_point.y = y / (z1 * ANGLE);
+	//+ ctx_p->var_fy;
 
 	return (f_point);
 
