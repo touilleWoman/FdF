@@ -19,7 +19,7 @@ t_color	color_set(int  val_cl)
 
 	if(val_cl < 0)
 		val_cl = - val_cl;
-	if (val_cl > 360)
+	while (val_cl > 360)
 		val_cl = val_cl - 360;
 
 	if (val_cl >= 0 && val_cl < 121)
@@ -180,7 +180,10 @@ void	draw(t_context *ctx_p)
 		x = 0;
 		y++;
 	}
+	mlx_string_put(ctx_p->mlx_ptr, ctx_p->win_ptr, 10, 10, 0x0000ffff, "Q W->image quality    A S->zoom    Z X->zoom faster");
+	mlx_string_put(ctx_p->mlx_ptr, ctx_p->win_ptr, 10, 30, 0x0000ffff, "C V->color H J->height of 3D object");
+	mlx_string_put(ctx_p->mlx_ptr, ctx_p->win_ptr, 10, 50, 0x0000ffff, "direction buttons->move camera      1 2 3 5->move screen of projection");
 
-	mlx_put_image_to_window(ctx_p->mlx_ptr, ctx_p->win_ptr, ctx_p->img_ptr, 50, 100);
 
+	mlx_put_image_to_window(ctx_p->mlx_ptr, ctx_p->win_ptr, ctx_p->img_ptr, 0, 100);
 }

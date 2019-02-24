@@ -14,13 +14,11 @@
 
 void	reset_map(t_context *ctx_p)
 {
-	ctx_p->preci = 100;
+	ctx_p->preci = 200;
 	ctx_p->mpp.d = 2;
 	ctx_p->var_z = 0;
-	ctx_p->var_x = 0;
+	ctx_p->var_x = 5;
 	ctx_p->var_y = 0;
-
-	ctx_p->temp = 0;
 	ctx_p->var_cl = 10;
 	ctx_p->var_fx = 0;
 	ctx_p->var_fy = 0;
@@ -41,9 +39,9 @@ int		key_press(int keycode, void *param)
 		exit(0);
 	}
 	if (keycode == KEYCODE_Q)
-		ctx_p->preci = ctx_p->preci + 30;
+		ctx_p->preci = ctx_p->preci + 20;
 	if (keycode == KEYCODE_W)
-		ctx_p->preci = ctx_p->preci - 30;
+		ctx_p->preci = ctx_p->preci - 20;
 	if (keycode == KEYCODE_Z)
 		ctx_p->mpp.d = ctx_p->mpp.d + 0.2;
 	if (keycode == KEYCODE_X && ctx_p->mpp.d > 0)
@@ -70,15 +68,15 @@ int		key_press(int keycode, void *param)
 	if (keycode == KEYCODE_V)
 		ctx_p->var_cl = ctx_p->var_cl - 10;
 	if (keycode == KEYCODE_THREE)
-		ctx_p->var_fx = ctx_p->var_fx + 0.1 ;
-	if (keycode == KEYCODE_ONE)
 		ctx_p->var_fx = ctx_p->var_fx - 0.1 ;
+	if (keycode == KEYCODE_ONE)
+		ctx_p->var_fx = ctx_p->var_fx + 0.1 ;
 	if (keycode == KEYCODE_FIVE)
 		ctx_p->var_fy = ctx_p->var_fy + 0.1 ;
 	if (keycode == KEYCODE_TWO)
 		ctx_p->var_fy = ctx_p->var_fy - 0.1 ;
 	if (keycode == KEYCODE_A)
-		ctx_p->angle = ctx_p->angle - 0.01 ;
+		ctx_p->angle = ctx_p->angle + 0.01 ;
 	if (keycode == KEYCODE_S)
 		ctx_p->angle = ctx_p->angle - 0.01 ;
 	mlx_clear_window(ctx_p->mlx_ptr, ctx_p->win_ptr);
