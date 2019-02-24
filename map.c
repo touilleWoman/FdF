@@ -21,7 +21,7 @@ int		check_map_line(char *line)
 	{
 		if ((line[i] != ' ')  && (line[i] != '-') && ((line[i] < '0') || (line[i] > '9')))
 		{
-			return (- 1);
+			return (-1);
 		}
 		i++;
 	}
@@ -61,6 +61,7 @@ int		check_map(char *argv, t_map_params *mpp)
 	close(fd);
 	return (0);
 }
+
 //Il gere pas la cas    la carte n'est pas en rectangle
 
 int		*aatoii(char **pptr, int *mppx)
@@ -85,24 +86,21 @@ int		*aatoii(char **pptr, int *mppx)
 		(*mppx)++;
 	}
 
-	int i;
+	//int i;
 	int j;
-	i= 0;
+	//i = 0;
 	j = 0;
 	while (pptr[j] != NULL)
 	{
-		i=0;
-		while (pptr[j][i])
-		{
-			printf("%c", pptr[j][i]);
-			i++;
-		}
-		free(pptr[j]);
-		printf("\n");
+		// i=0;
+		// // while (pptr[j][i])
+		// // {
+		// // 	i++;
+		// // }
+		// free(pptr[j]);
 		j++;
 	}
 	free(pptr);
-
 	return (tab);
 }
 
@@ -121,16 +119,11 @@ t_map_params		load_map(char *argv)
 		mpp.ret = -1;
 		return (mpp);
 	}
-
 	mpp.ret = check_map(argv, &mpp);
 	if (mpp.ret == -2)
-	{
 		return (mpp);
-	}
-
 	line = 0;
 	mpp.map = (int**)malloc(sizeof(int*) * mpp.y);
-
 	mpp.y = 0;
 	while (1)
 	{
@@ -140,11 +133,8 @@ t_map_params		load_map(char *argv)
 			return (mpp);
 		if (mpp.ret == 0)
 			break;
-		printf("=>%s|\n", line);
 		mpp.map[mpp.y] = aatoii(ft_strsplit(line, ' '), &mpp.x); //leaks possbile ici
 		mpp.y++;
 	}
-
-	//printf("x%dy%d\n", mpp.x, mpp.y );
 	return (mpp);
 }
