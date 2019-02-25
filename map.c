@@ -54,6 +54,7 @@ int					check_map(char *argv, t_map_params *mpp)
 		if (ret == -1)
 			return (-3);
 		mpp->y++;
+		free(line);
 	}
 	close(fd);
 	return (0);
@@ -115,6 +116,7 @@ t_map_params		load_map(char *argv)
 			break ;
 		mpp.map[mpp.y] = aatoii(ft_strsplit(line, ' '), &mpp.x);
 		mpp.y++;
+		free(line);
 	}
 	close(fd);
 	return (mpp);
