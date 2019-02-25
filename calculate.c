@@ -12,20 +12,15 @@
 
 #include "fdf.h"
 
-t_float_point convert2d(int x, int y, int z, t_context *p)
+t_float_point		convert2d(int x, int y, int z, t_context *p)
 {
-	t_float_point  f_point;
+	t_float_point	f_point;
 	int				z1;
 
 	if (z != p->mpp.z_min)
-	{
 		z1 = ((p->mpp.d) * ((p->mpp.x) - 1)) - (z + p->var_z);
-	}
 	else
-	{
-		z1 = ((p->mpp.d) * ((p->mpp.x) - 1)) - z ;
-
-	}
+		z1 = ((p->mpp.d) * ((p->mpp.x) - 1)) - z;
 	x = x + p->var_x;
 	y = y + p->var_y;
 	f_point.x = x / (z1 * p->angle) + p->var_fx;
@@ -33,13 +28,12 @@ t_float_point convert2d(int x, int y, int z, t_context *p)
 	return (f_point);
 }
 
-
-t_color		color_val_calculate(int  val_cl)
+t_color				color_val_calculate(int val_cl)
 {
 	t_color		cl;
 
-	if(val_cl < 0)
-		val_cl = - val_cl;
+	if (val_cl < 0)
+		val_cl = -val_cl;
 	while (val_cl > 360)
 		val_cl = val_cl - 360;
 	if (val_cl >= 0 && val_cl < 121)
@@ -56,9 +50,9 @@ t_color		color_val_calculate(int  val_cl)
 	}
 	else
 	{
-		cl.r = (val_cl - 240) * 255 /120;
+		cl.r = (val_cl - 240) * 255 / 120;
 		cl.g = 0;
-		cl.b = 255 -cl.r;
+		cl.b = 255 - cl.r;
 	}
 	return (cl);
 }
