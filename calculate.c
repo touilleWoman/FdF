@@ -10,35 +10,55 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
+#include "fdf.h"
 
-
-
-t_float_point convert2d(int x, int y, int z, t_context *ctx_p)
+t_float_point convert2d(int x, int y, int z, t_context *p)
 {
 	t_float_point  f_point;
 	int				z1;
 
-	if (z != ctx_p->mpp.z_min)
+	if (z != p->mpp.z_min)
 	{
-		z1 = ((ctx_p->mpp.d) * ((ctx_p->mpp.x) - 1)) - (z + ctx_p->var_z);
+		z1 = ((p->mpp.d) * ((p->mpp.x) - 1)) - (z + p->var_z);
 	}
 	else
 	{
-		z1 = ((ctx_p->mpp.d) * ((ctx_p->mpp.x) - 1)) - z ;
+		z1 = ((p->mpp.d) * ((p->mpp.x) - 1)) - z ;
 
 	}
-	//printf("z:%d\n", z );
-	//ar = ((mpp.x - 1.0) / (mpp.y -1)); // 常量，后面可以移出去
-
-	x = x + ctx_p->var_x;
-	y = y + ctx_p->var_y;
-
-	f_point.x = x / (z1 * ctx_p->angle) + ctx_p->var_fx; //f_point.y 在0 到1 之间
-	f_point.y = y / (z1 * ctx_p->angle) + ctx_p->var_fy;
-
+	x = x + p->var_x;
+	y = y + p->var_y;
+	f_point.x = x / (z1 * p->angle) + p->var_fx;
+	f_point.y = y / (z1 * p->angle) + p->var_fy;
 	return (f_point);
-
 }
 
 
+t_color		color_val_calculate(int  val_cl)
+{
+	t_color		cl;
+
+	if(val_cl < 0)
+		val_cl = - val_cl;
+	while (val_cl > 360)
+		val_cl = val_cl - 360;
+	if (val_cl >= 0 && val_cl < 121)
+	{
+		cl.b = 0;
+		cl.g = val_cl * (255 / 120);
+		cl.r = 255 - cl.g;
+	}
+	else if (val_cl < 240)
+	{
+		cl.b = (val_cl - 120) * 255 / 120;
+		cl.g = 255 - cl.b;
+		cl.r = 0;
+	}
+	else
+	{
+		cl.r = (val_cl - 240) * 255 /120;
+		cl.g = 0;
+		cl.b = 255 -cl.r;
+	}
+	return (cl);
+}

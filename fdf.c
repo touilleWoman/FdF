@@ -12,27 +12,26 @@
 
 #include "fdf.h"
 
-
-void	get_maxmin_z(t_context *ctx_p)
+void		get_maxmin_z(t_context *p)
 {
 	int		j;
 	int		i;
 
 	j = 0;
 	i = 0;
-	while (j < ctx_p->mpp.y)
+	while (j < p->mpp.y)
 	{
-		while (i < ctx_p->mpp.x)
+		while (i < p->mpp.x)
 		{
 			if ((i == 0) && (j == 0))
 			{
-				ctx_p->mpp.z_max = ctx_p->mpp.map[j][i];
-				ctx_p->mpp.z_min = ctx_p->mpp.map[j][i];
+				p->mpp.z_max = p->mpp.map[j][i];
+				p->mpp.z_min = p->mpp.map[j][i];
 			}
-			else if (ctx_p->mpp.map[j][i] > ctx_p->mpp.z_max)
-				ctx_p->mpp.z_max = ctx_p->mpp.map[j][i];
-			else if (ctx_p->mpp.map[j][i] < ctx_p->mpp.z_max)
-				ctx_p->mpp.z_min = ctx_p->mpp.map[j][i];
+			else if (p->mpp.map[j][i] > p->mpp.z_max)
+				p->mpp.z_max = p->mpp.map[j][i];
+			else if (p->mpp.map[j][i] < p->mpp.z_max)
+				p->mpp.z_min = p->mpp.map[j][i];
 			i++;
 		}
 		i = 0;
@@ -40,7 +39,7 @@ void	get_maxmin_z(t_context *ctx_p)
 	}
 }
 
-int		fdf(t_map_params	mpp)
+int			fdf(t_map_params mpp)
 {
 	t_context	ctx;
 
@@ -53,10 +52,10 @@ int		fdf(t_map_params	mpp)
 	if (ctx.win_ptr == 0)
 		return (-1);
 	ctx.img_ptr = mlx_new_image(ctx.mlx_ptr, WIN_X, WIN_Y);
-	ctx.data_addr = mlx_get_data_addr(ctx.img_ptr, &ctx.bpp, &ctx.size_line, &ctx.endian);
+	ctx.data_a = mlx_get_data_addr(ctx.img_ptr, &ctx.bpp, &ctx.size_l, &ctx.e);
 	reset_map(&ctx);
 	draw(&ctx);
-	mlx_hook (ctx.win_ptr, 2, 0, key_press, &ctx);
+	mlx_hook(ctx.win_ptr, 2, 0, key_press, &ctx);
 	mlx_loop(ctx.mlx_ptr);
 	return (0);
 }

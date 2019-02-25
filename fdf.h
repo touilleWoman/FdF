@@ -10,11 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef FDF_H
 # define FDF_H
-
-
 
 # include "mlx.h"
 # include "libft/libft.h"
@@ -42,86 +39,64 @@
 # define KEYCODE_TWO 84
 # define KEYCODE_THREE 85
 # define KEYCODE_FIVE 87
-
-
-
-
-
-
-
-
 # define WIN_X 1200
 # define WIN_Y 900
-//# define IMG_X 400
-//# define IMG_Y 300
 # define ANGLE 0.57735026919
-//0.57735026919
- // angle de vu = 60degree  ANGLE = tan(angle de vu / 2)
-//# define D 2
 # define WIN_NAME "fdf"
 
-typedef struct map_params
+typedef struct		map_params
 {
-	int			x;
-	int			y;
-	int			ret;
-	float		d;
-	int			**map;
-	int			z_max;
-	int			z_min;
-} 			t_map_params;
+	int				x;
+	int				y;
+	int				ret;
+	float			d;
+	int				**map;
+	int				z_max;
+	int				z_min;
+}					t_map_params;
 
-typedef struct float_point
+typedef struct		float_point
 {
-	float		x;
-	float		y;
-}			t_float_point;
+	float			x;
+	float			y;
+}					t_float_point;
 
 
-typedef struct context
+typedef struct		context
 {
-	void *mlx_ptr;
-	void *win_ptr;
-	int	bpp;
-	int	size_line;
-	int	endian;
-	void *img_ptr;
-	int		preci;
-	char	*data_addr;
-	int		var_z;
-	t_map_params mpp;
-	int		var_x;
-	int		var_y;
-	int		temp;
-	int		var_cl;
-	float 	var_fx;
-	float 	var_fy;
-	float 	angle;
-} 			t_context;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	int				bpp;
+	int				size_l;
+	int				e;
+	void 			*img_ptr;
+	int				preci;
+	char			*data_a;
+	int				var_z;
+	t_map_params 	mpp;
+	int				var_x;
+	int				var_y;
+	int				temp;
+	int				var_cl;
+	float			var_fx;
+	float			var_fy;
+	float			angle;
+}					t_context;
 
-typedef struct color
+typedef struct 		color
 {
 	unsigned char	r;
 	unsigned char	g;
 	unsigned char	b;
-}				t_color;
-// typedef struct event
-// {
-// 	int		preci;
-// 	int		d;
-// }				t_event;
+}					t_color;
 
-
-t_map_params	load_map(char *argv);
-int				fdf(t_map_params	mpp);
-t_float_point convert2d(int x, int y, int z, t_context *ctx_p);
-
-void	draw(t_context *ctx_p);
-void	draw_trait(t_float_point  fp1, t_float_point  fp, t_context *ctx_p, int z, int z1);
-void	reset_map(t_context *ctx_p);
-int		key_press(int keycode, void *param);
-void		draw_point(float fx, float fy, t_context * ctx_p, float z);
-void	color(int i, t_context *ctx_p, int z);
-
-
+t_map_params		load_map(char *argv);
+int					fdf(t_map_params	mpp);
+t_float_point		convert2d(int x, int y, int z, t_context *p);
+void				draw(t_context *p);
+void				draw_trait(t_float_point fp1, t_float_point fp, t_context *p, int z, int z1);
+void				reset_map(t_context *p);
+int					key_press(int keycode, void *param);
+void				draw_point(float fx, float fy, t_context *p, float z);
+t_color				color_val_calculate(int  val_cl);
 #endif
