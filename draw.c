@@ -12,8 +12,6 @@
 
 #include "fdf.h"
 
-
-
 void		draw_point(float fx, float fy, t_context *p, float z)
 {
 	int		i;
@@ -32,31 +30,27 @@ void		draw_point(float fx, float fy, t_context *p, float z)
 	put_color(i, p, z);
 }
 
-void		draw_trait(t_float_point fp1, t_float_point fp, t_context *p, int z, int z1)
+void		draw_trait(t_float_point fp1, t_float_point fp, t_context *p)
 {
 	float	vx;
 	float	vy;
-	float 	zz;
-
 
 	p->count = 0;
 	while (p->count < (p->preci))
 	{
 		if (fp1.x != fp.x)
 		{
-			vx = fp.x + (((fp1.x - fp.x) * p->count) / (p->preci) );
+			vx = fp.x + (((fp1.x - fp.x) * p->count) / (p->preci));
 			vy = (((fp1.y - fp.y) / (fp1.x - fp.x)) * (vx - fp.x)) + fp.y;
 			if (fp1.y != fp.y)
-				zz = z + (z1 - z) * p->count * 1.0 / p->preci;
-			else
-				zz = z;
-			draw_point(vx, vy, p, zz);
+				p->z = p->z + (p->z1 - p->z) * p->count * 1.0 / p->preci;
+			draw_point(vx, vy, p, p->z);
 		}
 		else
 		{
 			vx = fp.x;
 			vy = fp.y + (((fp1.y - fp.y) * p->count) / (p->preci));
-			draw_point(vx, vy, p, z);
+			draw_point(vx, vy, p, p->z);
 		}
 		p->count++;
 	}
@@ -67,22 +61,27 @@ void		draw_line(int x, int y, t_context *p, t_float_point fp)
 	t_float_point	fp1;
 	t_float_point	fp2;
 
+	p->z = p->mpp.map[y][x];
 	if (x == (p->mpp.x - 1) && y != (p->mpp.y - 1))
 	{
 		fp2 = convert2d(x, y + 1, p->mpp.map[y + 1][x], p);
-		draw_trait(fp2, fp, p, p->mpp.map[y][x], p->mpp.map[y + 1][x]);
+		p->z1 = p->mpp.map[y + 1][x];
+		draw_trait(fp2, fp, p);
 	}
 	if (y == (p->mpp.y - 1) && x != (p->mpp.x - 1))
 	{
 		fp1 = convert2d((x + 1), y, p->mpp.map[y][x + 1], p);
-		draw_trait(fp1, fp, p, p->mpp.map[y][x], p->mpp.map[y][x + 1]);
+		p->z1 = p->mpp.map[y][x + 1];
+		draw_trait(fp1, fp, p);
 	}
 	else if (x < (p->mpp.x - 1) && y < (p->mpp.y - 1))
 	{
 		fp1 = convert2d((x + 1), y, p->mpp.map[y][x + 1], p);
 		fp2 = convert2d(x, y + 1, p->mpp.map[y + 1][x], p);
-		draw_trait(fp1, fp, p, p->mpp.map[y][x], p->mpp.map[y][x + 1]);
-		draw_trait(fp2, fp, p, p->mpp.map[y][x], p->mpp.map[y + 1][x]);
+		p->z1 = p->mpp.map[y][x + 1];
+		draw_trait(fp1, fp, p);
+		p->z1 = p->mpp.map[y + 1][x];
+		draw_trait(fp2, fp, p);
 	}
 }
 

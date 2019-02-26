@@ -34,7 +34,7 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	mpp = load_map(argv[1]);
-	if ((mpp.ret == -1) || (mpp.ret == -2) || (mpp.ret == -3) || (mpp.ret == -4))
+	if (mpp.ret == -1 || mpp.ret == -2 || mpp.ret == -3 || mpp.ret == -4)
 	{
 		error_info(mpp.ret);
 		return (0);

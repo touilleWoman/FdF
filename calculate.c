@@ -57,7 +57,7 @@ t_color				color_val_calculate(int val_cl)
 	return (cl);
 }
 
-void		put_color(int i, t_context *p, float z)
+void				put_color(int i, t_context *p, float z)
 {
 	t_color		cl;
 	int			range;
