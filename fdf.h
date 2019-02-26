@@ -27,18 +27,18 @@
 # define KEYCODE_DOWN 125
 # define KEYCODE_LEFT 123
 # define KEYCODE_RIGHT 124
-# define KEYCODE_H 4
-# define KEYCODE_J 38
 # define KEYCODE_Q 12
 # define KEYCODE_W 13
 # define KEYCODE_A 0
 # define KEYCODE_S 1
 # define KEYCODE_C 8
 # define KEYCODE_V 9
-# define KEYCODE_ONE 83
-# define KEYCODE_TWO 84
-# define KEYCODE_THREE 85
-# define KEYCODE_FIVE 87
+# define KEYCODE_ONE 18
+# define KEYCODE_TWO 19
+# define KEYCODE_J 38
+# define KEYCODE_K 40
+# define KEYCODE_L 37
+# define KEYCODE_I 34
 # define WIN_X 1200
 # define WIN_Y 900
 # define ANGLE 0.57735026919
@@ -81,6 +81,7 @@ typedef struct		context
 	float			var_fx;
 	float			var_fy;
 	float			angle;
+	int				count;
 }					t_context;
 
 typedef struct 		color
@@ -99,4 +100,5 @@ void				reset_map(t_context *p);
 int					key_press(int keycode, void *param);
 void				draw_point(float fx, float fy, t_context *p, float z);
 t_color				color_val_calculate(int  val_cl);
+void				put_color(int i, t_context *p, float z);
 #endif

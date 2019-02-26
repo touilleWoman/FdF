@@ -56,3 +56,15 @@ t_color				color_val_calculate(int val_cl)
 	}
 	return (cl);
 }
+
+void		put_color(int i, t_context *p, float z)
+{
+	t_color		cl;
+	int			range;
+
+	range = 120 * z / (p->mpp.z_max - p->mpp.z_min) + p->var_cl;
+	cl = color_val_calculate(range);
+	p->data_a[i * 4 + 2] = cl.r;
+	p->data_a[i * 4 + 1] = cl.g;
+	p->data_a[i * 4] = cl.b;
+}

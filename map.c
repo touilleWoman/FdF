@@ -33,7 +33,6 @@ int					check_map(char *argv, t_map_params *mpp)
 {
 	int		fd;
 	char	*line;
-	int		ret;
 
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
@@ -41,18 +40,19 @@ int					check_map(char *argv, t_map_params *mpp)
 	mpp->y = 0;
 	while (1)
 	{
-		ret = get_next_line(fd, &line);
-		if (ret == -1)
+		mpp->ret = get_next_line(fd, &line);
+		if (mpp->ret == -1)
 			return (-1);
-		if ((mpp->y == 0) && (ret == 0))
+		if ((mpp->y == 0) && (mpp->ret == 0))
 			return (-2);
-		if (ret == 0)
+		if (mpp->ret == 0)
 			break ;
-		ret = check_map_line(line);
-		if (ret == -1)
+		mpp->ret = check_map_line(line);
+		if (mpp->ret == -1)
 			return (-3);
 		mpp->y++;
 		free(line);
+		line = 0;
 	}
 	close(fd);
 	return (0);
@@ -109,6 +109,7 @@ t_map_params		stock_map(int fd, t_map_params mpp)
 		}
 		mpp.y++;
 		free(line);
+		line = NULL;
 	}
 	return (mpp);
 }

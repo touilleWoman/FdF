@@ -39,13 +39,13 @@ void	key_press2(int keycode, t_context *p)
 		p->var_cl = p->var_cl + 10;
 	if (keycode == KEYCODE_V)
 		p->var_cl = p->var_cl - 10;
-	if (keycode == KEYCODE_THREE)
+	if (keycode == KEYCODE_L)
 		p->var_fx = p->var_fx - 0.1;
-	if (keycode == KEYCODE_ONE)
+	if (keycode == KEYCODE_J)
 		p->var_fx = p->var_fx + 0.1;
-	if (keycode == KEYCODE_FIVE)
+	if (keycode == KEYCODE_I)
 		p->var_fy = p->var_fy + 0.1;
-	if (keycode == KEYCODE_TWO)
+	if (keycode == KEYCODE_K)
 		p->var_fy = p->var_fy - 0.1;
 	if (keycode == KEYCODE_A)
 		p->angle = p->angle + 0.01;
@@ -73,9 +73,9 @@ int		key_press(int keycode, void *param)
 	}
 	if (keycode == KEYCODE_X && (p->mpp.d > 0))
 		p->mpp.d = p->mpp.d - 0.2;
-	if (keycode == KEYCODE_H)
+	if (keycode == KEYCODE_TWO)
 		p->var_z++;
-	if (keycode == KEYCODE_J)
+	if (keycode == KEYCODE_ONE)
 		p->var_z--;
 	if (keycode == KEYCODE_Z)
 		p->mpp.d = p->mpp.d + 0.2;
