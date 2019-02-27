@@ -14,7 +14,7 @@
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g -ggdb 
 
 SOURCE = main.c map.c fdf.c calculate.c draw.c events.c
 

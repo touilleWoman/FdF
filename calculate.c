@@ -18,13 +18,13 @@ t_float_point		convert2d(int x, int y, int z, t_context *p)
 	int				z1;
 
 	if (z != p->mpp.z_min)
-		z1 = ((p->mpp.d) * ((p->mpp.x) - 1)) - (z + p->var_z);
+		z1 = z + p->var_z;
 	else
-		z1 = ((p->mpp.d) * ((p->mpp.x) - 1)) - z;
-	x = x + p->var_x;
-	y = y + p->var_y;
-	f_point.x = x / (z1 * p->angle) + p->var_fx;
-	f_point.y = y / (z1 * p->angle) + p->var_fy;
+		z1 = z;
+
+	f_point.x = x / (2 * 0.57735026919) / (p->cz - z1);
+	f_point.y = y / (2 * 0.57735026919) / (p->cz - z1);
+
 	return (f_point);
 }
 

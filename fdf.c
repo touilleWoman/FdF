@@ -19,9 +19,9 @@ void		get_maxmin_z(t_context *p)
 
 	j = 0;
 	i = 0;
-	while (j < p->mpp.y)
+	while (j < p->mpp.y + 1)
 	{
-		while (i < p->mpp.x)
+		while (i < p->mpp.x + 1)
 		{
 			if ((i == 0) && (j == 0))
 			{
@@ -30,13 +30,14 @@ void		get_maxmin_z(t_context *p)
 			}
 			else if (p->mpp.map[j][i] > p->mpp.z_max)
 				p->mpp.z_max = p->mpp.map[j][i];
-			else if (p->mpp.map[j][i] < p->mpp.z_max)
+			else if (p->mpp.map[j][i] < p->mpp.z_min)
 				p->mpp.z_min = p->mpp.map[j][i];
 			i++;
 		}
 		i = 0;
 		j++;
 	}
+	printf("zmax%d   zmin%d\n", p->mpp.z_max, p->mpp.z_min );
 }
 
 int			fdf(t_map_params mpp)

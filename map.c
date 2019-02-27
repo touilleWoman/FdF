@@ -136,6 +136,8 @@ t_map_params		load_map(char *argv)
 	}
 	mpp.y = 0;
 	mpp = stock_map(fd, mpp);
+	mpp.x = mpp.x - 1;
+	mpp.y = mpp.y - 1;
 	close(fd);
 	return (mpp);
 }

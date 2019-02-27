@@ -39,8 +39,8 @@
 # define KEYCODE_K 40
 # define KEYCODE_L 37
 # define KEYCODE_I 34
-# define WIN_X 1200
-# define WIN_Y 900
+# define WIN_X 1000
+# define WIN_Y 1000
 # define ANGLE 0.57735026919
 # define WIN_NAME "fdf"
 
@@ -49,7 +49,6 @@ typedef struct		map_params
 	int				x;
 	int				y;
 	int				ret;
-	float			d;
 	int				**map;
 	int				z_max;
 	int				z_min;
@@ -64,6 +63,12 @@ typedef struct		float_point
 
 typedef struct		context
 {
+	float				cz;
+	float			cx;
+	float			cy;
+	float			d_ecran;
+
+
 	int				z;
 	int				z1;
 	void			*mlx_ptr;
@@ -82,7 +87,6 @@ typedef struct		context
 	int				var_cl;
 	float			var_fx;
 	float			var_fy;
-	float			angle;
 	int				count;
 }					t_context;
 
