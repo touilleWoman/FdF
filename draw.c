@@ -25,7 +25,6 @@ void		draw_point(float fx, float fy, t_context *p, float z)
 	if ((xx >= 1200) || (yy >= 900))
 		return ;
 	i = yy * WIN_X + xx;
-
 	put_color(i, p, z);
 }
 
