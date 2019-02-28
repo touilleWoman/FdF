@@ -16,14 +16,16 @@ t_float_point		convert2d(int x, int y, int z, t_context *p)
 {
 	t_float_point	f_point;
 	int				z1;
+	float			ar;
 
+	ar = WIN_X / WIN_Y;
 	if (z != p->mpp.z_min)
 		z1 = ((p->mpp.d) * ((p->mpp.x) - 1)) - (z + p->var_z);
 	else
 		z1 = ((p->mpp.d) * ((p->mpp.x) - 1)) - z;
 	x = x + p->var_x;
 	y = y + p->var_y;
-	f_point.x = x / (z1 * p->angle) + p->var_fx;
+	f_point.x = x / (ar * (z1 * p->angle)) + p->var_fx;
 	f_point.y = y / (z1 * p->angle) + p->var_fy;
 	return (f_point);
 }

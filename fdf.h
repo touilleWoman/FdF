@@ -97,7 +97,7 @@ t_map_params		load_map(char *argv);
 int					fdf(t_map_params	mpp);
 t_float_point		convert2d(int x, int y, int z, t_context *p);
 void				draw(t_context *p);
-void		draw_trait(t_float_point fp1, t_float_point fp, t_context *p);
+void				draw_trait(t_float_point fp1, t_float_point fp, t_context *p);
 void				reset_map(t_context *p);
 int					key_press(int keycode, void *param);
 void				draw_point(float fx, float fy, t_context *p, float z);
