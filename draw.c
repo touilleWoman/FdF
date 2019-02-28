@@ -34,23 +34,24 @@ void		draw_trait(t_float_point fp1, t_float_point fp, t_context *p)
 {
 	float	vx;
 	float	vy;
+	float   vz;
 
 	p->count = 0;
+	vz = p->z + (p->z1 - p->z) * p->count * 1.0 / p->preci;
+
 	while (p->count < (p->preci))
 	{
 		if (fp1.x != fp.x)
 		{
 			vx = fp.x + (((fp1.x - fp.x) * p->count) / (p->preci));
 			vy = (((fp1.y - fp.y) / (fp1.x - fp.x)) * (vx - fp.x)) + fp.y;
-			if (fp1.y != fp.y)
-				p->z = p->z + (p->z1 - p->z) * p->count * 1.0 / p->preci;
-			draw_point(vx, vy, p, p->z);
+			draw_point(vx, vy, p, vz);
 		}
 		else
 		{
 			vx = fp.x;
 			vy = fp.y + (((fp1.y - fp.y) * p->count) / (p->preci));
-			draw_point(vx, vy, p, p->z);
+			draw_point(vx, vy, p, vz);
 		}
 		p->count++;
 	}
