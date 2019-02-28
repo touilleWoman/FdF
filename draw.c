@@ -25,6 +25,7 @@ void		draw_point(float fx, float fy, t_context *p, float z)
 	if ((xx >= 1200) || (yy >= 900))
 		return ;
 	i = yy * WIN_X + xx;
+
 	put_color(i, p, z);
 }
 
@@ -32,14 +33,12 @@ void		draw_trait(t_float_point fp1, t_float_point fp, t_context *p)
 {
 	float	vx;
 	float	vy;
-	float   vz;
+	float	vz;
 
 	p->count = 0;
-
 	while (p->count < (p->preci))
 	{
 		vz = p->z + (p->z1 - p->z) * p->count * 1.0 / p->preci;
-
 		if (fp1.x != fp.x)
 		{
 			vx = fp.x + (((fp1.x - fp.x) * p->count) / (p->preci));
@@ -106,10 +105,10 @@ void		draw(t_context *p)
 		y++;
 	}
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 10, 10, 0x0000ffff,
-		"Q W->image quality    Z X->zoom in    X->zoom out  A S->zoom slower");
+		"Q W->image quality    Z ->zoom in    X->zoom out  A S->zoom slower");
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 10, 30, 0x0000ffff,
 		"C V->color 1 2->height of 3D object");
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 10, 50, 0x0000ffff,
 		"direction keys->move camera    J K L I->move screen of projection");
-	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 100);
+	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 10, 100);
 }

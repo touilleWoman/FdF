@@ -19,7 +19,9 @@ t_float_point		convert2d(int x, int y, int z, t_context *p)
 	float			ar;
 
 	ar = WIN_X / WIN_Y;
-	if (z != p->mpp.z_min)
+	if (p->mpp.x == 1)
+		z1 = p->mpp.d * 2;
+	else if (z != p->mpp.z_min)
 		z1 = ((p->mpp.d) * ((p->mpp.x) - 1)) - (z + p->var_z);
 	else
 		z1 = ((p->mpp.d) * ((p->mpp.x) - 1)) - z;

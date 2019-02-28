@@ -44,7 +44,7 @@
 # define ANGLE 0.57735026919
 # define WIN_NAME "fdf"
 
-typedef struct		map_params
+typedef struct		s_map_params
 {
 	int				x;
 	int				y;
@@ -55,14 +55,13 @@ typedef struct		map_params
 	int				z_min;
 }					t_map_params;
 
-typedef struct		float_point
+typedef struct		s_float_point
 {
 	float			x;
 	float			y;
 }					t_float_point;
 
-
-typedef struct		context
+typedef struct		s_context
 {
 	int				z;
 	int				z1;
@@ -71,11 +70,11 @@ typedef struct		context
 	int				bpp;
 	int				size_l;
 	int				e;
-	void 			*img_ptr;
+	void			*img_ptr;
 	int				preci;
 	char			*data_a;
 	int				var_z;
-	t_map_params 	mpp;
+	t_map_params	mpp;
 	int				var_x;
 	int				var_y;
 	int				temp;
@@ -86,7 +85,7 @@ typedef struct		context
 	int				count;
 }					t_context;
 
-typedef struct 		color
+typedef struct		s_color
 {
 	unsigned char	r;
 	unsigned char	g;
@@ -97,10 +96,11 @@ t_map_params		load_map(char *argv);
 int					fdf(t_map_params	mpp);
 t_float_point		convert2d(int x, int y, int z, t_context *p);
 void				draw(t_context *p);
-void				draw_trait(t_float_point fp1, t_float_point fp, t_context *p);
+void				draw_trait(t_float_point fp1, t_float_point fp,
+													t_context *p);
 void				reset_map(t_context *p);
 int					key_press(int keycode, void *param);
 void				draw_point(float fx, float fy, t_context *p, float z);
-t_color				color_val_calculate(int  val_cl);
+t_color				color_val_calculate(int val_cl);
 void				put_color(int i, t_context *p, float z);
 #endif
