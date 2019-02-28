@@ -32,8 +32,9 @@ all: $(NAME)
 $(NAME):  $(OFILE)
 	$(CC) $(CFLAGS) $(OFILE)   libft/libft.a  -L minilibx_macos   -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-$(OFILE): $(SOURCE) $(LIBFT) $(HEADER)
-	$(CC) $(CFLAGS) -c $(SOURCE)  -I minilibx_macos
+
+%.o: %.c $(LIBFT) $(HEADER)
+	$(CC) $(CFLAGS) -c $(SOURCE) -I minilibx_macos
 
 $(LIBFT): $(LIBFT_H)
 	make -C ./libft

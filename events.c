@@ -48,9 +48,9 @@ void	key_press2(int keycode, t_context *p)
 	if (keycode == KEYCODE_K)
 		p->var_fy = p->var_fy + 0.1;
 	if (keycode == KEYCODE_A)
-		p->angle = p->angle - 0.001;
+		p->angle = p->angle - 0.005;
 	if (keycode == KEYCODE_S)
-		p->angle = p->angle + 0.001;
+		p->angle = p->angle + 0.005;
 }
 
 void	key_press3(int keycode, t_context *p)
