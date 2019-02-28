@@ -29,15 +29,16 @@ HEADER = fdf.h
 
 all: $(NAME)
 
-$(NAME):  $(OFILE)
-	$(CC) $(CFLAGS) $(OFILE)   libft/libft.a  -L minilibx_macos   -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(LIBFT) $(OFILE)
+	$(CC) $(CFLAGS) $(OFILE) $(LIBFT) -L minilibx_macos   -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-
-%.o: %.c $(LIBFT) $(HEADER)
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $(SOURCE) -I minilibx_macos
 
-$(LIBFT): $(LIBFT_H)
+$(LIBFT): FORCE
 	make -C ./libft
+
+FORCE:
 
 clean:
 	rm -f $(OFILE)
